@@ -3,8 +3,8 @@ package br.com.fiap.to;
 import java.time.LocalDate;
 
 public class UsuariosTO {
-    private Long isUsuario;
-    private String nomeUsuario;
+    private Long idUsuario;
+    private String nomeCompleto;
     private String email;
     private String senha;
     private String telefone;
@@ -13,29 +13,29 @@ public class UsuariosTO {
     public UsuariosTO() {
     }
 
-    public UsuariosTO(Long isUsuario, String nomeUsuario, String email, String senha, String telefone, LocalDate dataNascimento) {
-        this.isUsuario = isUsuario;
-        this.nomeUsuario = nomeUsuario;
+    public UsuariosTO(Long idUsuario, String nomeCompleto, String email, String senha, String telefone, LocalDate dataNascimento) {
+        this.idUsuario = idUsuario;
+        this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
     }
 
-    public Long getIsUsuario() {
-        return isUsuario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIsUsuario(Long isUsuario) {
-        this.isUsuario = isUsuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getEmail() {
