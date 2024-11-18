@@ -1,6 +1,7 @@
 package br.com.fiap.to;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PedidosTO {
     private Long idPedido;
@@ -10,11 +11,12 @@ public class PedidosTO {
     private Double totalPedido;
     private String tipoTransacao;
     private LocalDate dataEntrega;
+    private List<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
 
-    public PedidosTO() {
-    }
+    public PedidosTO() {}
 
-    public PedidosTO(Long idPedido, Long idUsuario, LocalDate dataPedido, String status, Double totalPedido, String tipoTransacao, LocalDate dataEntrega) {
+    public PedidosTO(Long idPedido, Long idUsuario, LocalDate dataPedido, String status, Double totalPedido,
+                     String tipoTransacao, LocalDate dataEntrega, List<ItensPedidoTO> itensPedido) {
         this.idPedido = idPedido;
         this.idUsuario = idUsuario;
         this.dataPedido = dataPedido;
@@ -22,6 +24,7 @@ public class PedidosTO {
         this.totalPedido = totalPedido;
         this.tipoTransacao = tipoTransacao;
         this.dataEntrega = dataEntrega;
+        this.itensPedido = itensPedido;
     }
 
     public Long getIdPedido() {
@@ -79,6 +82,12 @@ public class PedidosTO {
     public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
+
+    public List<ItensPedidoTO> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(List<ItensPedidoTO> itensPedido) {
+        this.itensPedido = itensPedido;
+    }
 }
-
-

@@ -56,7 +56,7 @@ public class EnderecosDAO extends Repository {
 
     public EnderecoTO save(EnderecoTO endereco) {
         String sql = "INSERT INTO enderecos (endereco_id_user, cep, rua, cidade, estado, numero) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, endereco.getEnderecoIdUser());
             ps.setString(2, endereco.getCep());
             ps.setString(3, endereco.getRua());
