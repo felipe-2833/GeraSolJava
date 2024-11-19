@@ -71,6 +71,7 @@ public class ItensPedidosDAO extends Repository {
     public ItensPedidoTO update(ItensPedidoTO item) {
         String sql = "UPDATE itens_pedido SET id_pedido = ?, id_gerador = ?, quantidade = ?, valor_unitario = ?, " +
                 "subtotal = ?, tipo_transacao = ? WHERE id_item = ?";
+        item.setSubtotal(item.calcularSubtotal(item.getQuantidade(), item.getValorUnitario()));
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, item.getIdPedido());
             ps.setLong(2, item.getIdGerador());

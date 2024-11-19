@@ -2,16 +2,17 @@ package br.com.fiap.to;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public class ItensPedidoTO {
     private Long idItem;
     private Long idPedido;
     private Long idGerador;
-    @NotNull @PositiveOrZero private int quantidade;
+    @NotNull @Positive private int quantidade;
     @NotNull @PositiveOrZero private Double valorUnitario;
     @NotBlank private String tipoTransacao;
-    @NotNull @PositiveOrZero private Double subtotal;
+    private Double subtotal;
 
     public ItensPedidoTO() {
     }
@@ -80,5 +81,9 @@ public class ItensPedidoTO {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public Double calcularSubtotal(int quantidade, Double valorUnitario){
+        return quantidade * valorUnitario;
     }
 }

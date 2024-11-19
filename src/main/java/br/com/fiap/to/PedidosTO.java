@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidosTO {
@@ -11,15 +12,15 @@ public class PedidosTO {
     private Long idUsuario;
     @PastOrPresent private LocalDate dataPedido;
     @NotBlank private String status;
-    @NotNull @PositiveOrZero private Double totalPedido;
+    private Double totalPedido;
     @NotBlank private String tipoTransacao;
     @FutureOrPresent private LocalDate dataEntrega;
-    @Valid private List<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
+    @Valid private ArrayList<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
 
     public PedidosTO() {}
 
     public PedidosTO(Long idPedido, Long idUsuario, LocalDate dataPedido, String status, Double totalPedido,
-                     String tipoTransacao, LocalDate dataEntrega, List<ItensPedidoTO> itensPedido) {
+                     String tipoTransacao, LocalDate dataEntrega, ArrayList<ItensPedidoTO> itensPedido) {
         this.idPedido = idPedido;
         this.idUsuario = idUsuario;
         this.dataPedido = dataPedido;
@@ -86,11 +87,20 @@ public class PedidosTO {
         this.dataEntrega = dataEntrega;
     }
 
-    public List<ItensPedidoTO> getItensPedido() {
+    public ArrayList<ItensPedidoTO> getItensPedido() {
         return itensPedido;
     }
 
-    public void setItensPedido(List<ItensPedidoTO> itensPedido) {
+    public void setItensPedido(ArrayList<ItensPedidoTO> itensPedido) {
         this.itensPedido = itensPedido;
+    }
+
+    public Double calcularValorTotal(ArrayList<ItensPedidoTO> lista){
+        Double valor = 0.0;
+        for (ItensPedidoTO item : lista){
+            item.setSubtotal(item.calcularSubtotal(item.getQuantidade(),item.getValorUnitario()));
+            valor += item.getSubtotal();
+        }
+        return valor;
     }
 }

@@ -57,6 +57,7 @@ public class PedidosDAO extends Repository {
 
     public PedidosTO save(PedidosTO pedido) {
         String sqlPedido = "INSERT INTO pedidos (id_usuario, data_pedido, status, total_pedido, tipo_transacao, data_entrega) VALUES (?, ?, ?, ?, ?, ?)";
+        pedido.setTotalPedido(pedido.calcularValorTotal(pedido.getItensPedido()));
         try (PreparedStatement ps = getConnection().prepareStatement(sqlPedido)) {
             // Salvar o pedido
             ps.setLong(1, pedido.getIdUsuario());
@@ -72,8 +73,8 @@ public class PedidosDAO extends Repository {
                     ResultSet rs = psItem.executeQuery();
                     if (rs.next()) {
                         long idPedido = rs.getLong("id_pedido");
-                        System.out.println(idPedido);
                         for (ItensPedidoTO item : pedido.getItensPedido()) {
+                            item.setSubtotal(item.calcularSubtotal(item.getQuantidade(), item.getValorUnitario()));
                             String sqlItemPedido = "INSERT INTO itens_pedido (id_pedido, id_gerador, quantidade, valor_unitario, subtotal, tipo_transacao) VALUES (?, ?, ?, ?, ?, ?)";
                             try(PreparedStatement ps2 = getConnection().prepareStatement(sqlItemPedido)){
                                 ps2.setLong(1, idPedido);
