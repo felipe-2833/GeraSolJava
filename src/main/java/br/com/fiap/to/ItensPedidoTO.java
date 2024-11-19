@@ -1,13 +1,17 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class ItensPedidoTO {
     private Long idItem;
     private Long idPedido;
     private Long idGerador;
-    private int quantidade;
-    private Double valorUnitario;
-    private String tipoTransacao;
-    private Double subtotal;
+    @NotNull @PositiveOrZero private int quantidade;
+    @NotNull @PositiveOrZero private Double valorUnitario;
+    @NotBlank private String tipoTransacao;
+    @NotNull @PositiveOrZero private Double subtotal;
 
     public ItensPedidoTO() {
     }

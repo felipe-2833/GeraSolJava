@@ -1,19 +1,23 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class GeradoresTO {
     private Long idGerador;
     private Long idMarca;
     private Long idCategoria;
-    private String modelo;
-    private String descricao;
-    private Double potencia;
-    private Double capacidadeBateria;
-    private String portas;
-    private String tempoCarga;
-    private Double precoVenda;
-    private Double precoAluguelDiario;
-    private String durabilidade;
-    private String portatil;
+    @NotBlank private String modelo;
+    @NotBlank private String descricao;
+    @NotNull @PositiveOrZero private Double potencia;
+    @NotNull @PositiveOrZero  private Double capacidadeBateria;
+    @NotBlank private String portas;
+    @NotBlank private String tempoCarga;
+    @NotNull @PositiveOrZero private Double precoVenda;
+    @NotNull @PositiveOrZero private Double precoAluguelDiario;
+    @NotBlank private String durabilidade;
+    @NotBlank private String portatil;
 
     public GeradoresTO() {
     }

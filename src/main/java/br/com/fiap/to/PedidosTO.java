@@ -1,17 +1,20 @@
 package br.com.fiap.to;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class PedidosTO {
     private Long idPedido;
     private Long idUsuario;
-    private LocalDate dataPedido;
-    private String status;
-    private Double totalPedido;
-    private String tipoTransacao;
-    private LocalDate dataEntrega;
-    private List<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
+    @PastOrPresent private LocalDate dataPedido;
+    @NotBlank private String status;
+    @NotNull @PositiveOrZero private Double totalPedido;
+    @NotBlank private String tipoTransacao;
+    @FutureOrPresent private LocalDate dataEntrega;
+    @Valid private List<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
 
     public PedidosTO() {}
 

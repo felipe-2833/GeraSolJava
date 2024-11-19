@@ -1,9 +1,11 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CategoriaTO {
     private Long idCategoria;
-    private String nomeCategoria;
-    private String descricao;
+    @NotBlank private String nomeCategoria;
+    @NotBlank private String descricao;
 
     public CategoriaTO() {
     }

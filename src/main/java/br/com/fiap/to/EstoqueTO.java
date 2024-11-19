@@ -1,10 +1,13 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class EstoqueTO {
     private Long idEstoque;
     private Long idGerador;
-    private int quantidadeDisponivel;
-    private int quantidadeReservada;
+    @NotNull @PositiveOrZero private int quantidadeDisponivel;
+    @NotNull @PositiveOrZero private int quantidadeReservada;
 
     public EstoqueTO() {
     }

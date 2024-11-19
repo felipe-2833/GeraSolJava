@@ -1,14 +1,17 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+
 import java.time.LocalDate;
 
 public class UsuariosTO {
     private Long idUsuario;
-    private String nomeCompleto;
-    private String email;
-    private String senha;
-    private String telefone;
-    private LocalDate dataNascimento;
+    @NotBlank private String nomeCompleto;
+    @NotBlank private String email;
+    @NotBlank private String senha;
+    @NotBlank private String telefone;
+    @Past private LocalDate dataNascimento;
 
     public UsuariosTO() {
     }
