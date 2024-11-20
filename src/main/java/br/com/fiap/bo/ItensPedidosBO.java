@@ -20,7 +20,14 @@ public class ItensPedidosBO {
         return itensPedidosDAO.delete(id);
     }
 
-    public ItensPedidoTO update(ItensPedidoTO item) {
+    public ItensPedidoTO update(ItensPedidoTO item) throws Exception{
+        ArrayList<String> ifTipoTras = new ArrayList<String>();
+        ifTipoTras.add("Venda");
+        ifTipoTras.add("Aluguel");
+
+        if (!ifTipoTras.contains(item.getTipoTransacao())){
+            throw new Exception("informação TipoTransação inválido. Permitidos: " + ifTipoTras );
+        }
         return itensPedidosDAO.update(item);
     }
 }

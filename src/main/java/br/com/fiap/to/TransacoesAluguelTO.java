@@ -14,7 +14,7 @@ public class TransacoesAluguelTO {
     @NotNull @PositiveOrZero private int diasAluguel;
     @NotNull @PositiveOrZero private Double valorDiario;
     @NotNull @PositiveOrZero private Double totalAluguel;
-    @NotBlank private String statusAluguel;
+    @NotBlank(message = "Status é obrigatório e deve ser 'Ativo' ou 'Concluido' ou 'Cancelado'")  private String statusAluguel;
 
     public TransacoesAluguelTO() {
     }

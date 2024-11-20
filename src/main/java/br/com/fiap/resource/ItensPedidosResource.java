@@ -58,15 +58,24 @@ public class ItensPedidosResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(@Valid ItensPedidoTO item, @PathParam("id") Long id) {
-        item.setIdItem(id);
-        ItensPedidoTO resultado = itensPedidosBO.update(item);
-        Response.ResponseBuilder response = null;
-        if (resultado != null) {
-            response = Response.status(201);
-        } else {
-            response = Response.status(400);
+        try{
+            item.setIdItem(id);
+            ItensPedidoTO resultado = itensPedidosBO.update(item);
+            Response.ResponseBuilder response = null;
+            if (resultado != null) {
+                response = Response.status(201);
+            } else {
+                response = Response.status(400);
+            }
+            response.entity(resultado);
+            return response.build();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar:" + e.getMessage() );
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao atualizar item: " + e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        response.entity(resultado);
-        return response.build();
+
     }
 }

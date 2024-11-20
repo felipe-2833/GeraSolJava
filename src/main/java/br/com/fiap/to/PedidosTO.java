@@ -11,9 +11,9 @@ public class PedidosTO {
     private Long idPedido;
     private Long idUsuario;
     @PastOrPresent private LocalDate dataPedido;
-    @NotBlank private String status;
+    @NotBlank(message = "Status é obrigatório e deve ser 'pendente' ou 'Concluido' ou 'Cancelado'") private String status;
     private Double totalPedido;
-    @NotBlank private String tipoTransacao;
+    @NotBlank(message = "TipoTransação é obrigatório e deve ser 'Venda' ou 'Aluguel' ou 'Ambos'") private String tipoTransacao;
     @FutureOrPresent private LocalDate dataEntrega;
     @Valid private ArrayList<ItensPedidoTO> itensPedido; // Lista de itens associados ao pedido
 

@@ -45,15 +45,24 @@ public class PedidosResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(@Valid PedidosTO pedido) {
-        PedidosTO resultado = pedidosBO.save(pedido);
-        Response.ResponseBuilder response = null;
-        if (resultado != null) {
-            response = Response.created(null);
-        } else {
-            response = Response.status(400);
+        try{
+            PedidosTO resultado = pedidosBO.save(pedido);
+            Response.ResponseBuilder response = null;
+            if (resultado != null) {
+                response = Response.created(null);
+            } else {
+                response = Response.status(400);
+            }
+            response.entity(resultado);
+            return response.build();
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar:" + e.getMessage() );
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao salvar gerador: " + e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        response.entity(resultado);
-        return response.build();
+
     }
 
     @DELETE
@@ -72,15 +81,24 @@ public class PedidosResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(@Valid PedidosTO pedido, @PathParam("id") Long id) {
-        pedido.setIdPedido(id);
-        PedidosTO resultado = pedidosBO.update(pedido);
-        Response.ResponseBuilder response = null;
-        if (resultado != null) {
-            response = Response.status(201);
-        } else {
-            response = Response.status(400);
+        try{
+            pedido.setIdPedido(id);
+            PedidosTO resultado = pedidosBO.update(pedido);
+            Response.ResponseBuilder response = null;
+            if (resultado != null) {
+                response = Response.status(201);
+            } else {
+                response = Response.status(400);
+            }
+            response.entity(resultado);
+            return response.build();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar:" + e.getMessage() );
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao atualizar pedido: " + e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        response.entity(resultado);
-        return response.build();
+
     }
 }

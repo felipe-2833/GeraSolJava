@@ -11,7 +11,7 @@ public class ItensPedidoTO {
     private Long idGerador;
     @NotNull @Positive private int quantidade;
     @NotNull @PositiveOrZero private Double valorUnitario;
-    @NotBlank private String tipoTransacao;
+    @NotBlank(message = "TipoTransação é obrigatório e deve ser 'Venda' ou 'Aluguel' ou 'Ambos'") private String tipoTransacao;
     private Double subtotal;
 
     public ItensPedidoTO() {

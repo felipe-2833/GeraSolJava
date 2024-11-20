@@ -45,15 +45,24 @@ public class TransacoesAluguelResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(@Valid TransacoesAluguelTO transacao) {
-        TransacoesAluguelTO resultado = transacoesAluguelBO.save(transacao);
-        Response.ResponseBuilder response = null;
-        if (resultado != null) {
-            response = Response.created(null);
-        } else {
-            response = Response.status(400);
+        try{
+            TransacoesAluguelTO resultado = transacoesAluguelBO.save(transacao);
+            Response.ResponseBuilder response = null;
+            if (resultado != null) {
+                response = Response.created(null);
+            } else {
+                response = Response.status(400);
+            }
+            response.entity(resultado);
+            return response.build();
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar:" + e.getMessage() );
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao salvar transação de aluguel: " + e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        response.entity(resultado);
-        return response.build();
+
     }
 
     @DELETE
@@ -72,15 +81,24 @@ public class TransacoesAluguelResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(@Valid TransacoesAluguelTO transacao, @PathParam("id") Long id) {
-        transacao.setIdAluguel(id);
-        TransacoesAluguelTO resultado = transacoesAluguelBO.update(transacao);
-        Response.ResponseBuilder response = null;
-        if (resultado != null) {
-            response = Response.status(201);
-        } else {
-            response = Response.status(400);
+        try{
+            transacao.setIdAluguel(id);
+            TransacoesAluguelTO resultado = transacoesAluguelBO.update(transacao);
+            Response.ResponseBuilder response = null;
+            if (resultado != null) {
+                response = Response.status(201);
+            } else {
+                response = Response.status(400);
+            }
+            response.entity(resultado);
+            return response.build();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar:" + e.getMessage() );
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao atualizar transação de aluguel: " + e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
-        response.entity(resultado);
-        return response.build();
+
     }
 }

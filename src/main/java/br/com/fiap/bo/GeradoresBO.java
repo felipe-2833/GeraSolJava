@@ -16,7 +16,13 @@ public class GeradoresBO {
         return geradoresDAO.findById(id);
     }
 
-    public GeradoresTO save(GeradoresTO gerador) {
+    public GeradoresTO save(GeradoresTO gerador) throws Exception {
+        ArrayList<String> ifPortatil = new ArrayList<String>();
+        ifPortatil.add("Sim");
+        ifPortatil.add("Nao");
+        if (!ifPortatil.contains(gerador.getPortatil())){
+            throw new Exception("informação portatil inválido. Permitidos: " + ifPortatil);
+        }
         return geradoresDAO.save(gerador);
     }
 
@@ -24,7 +30,13 @@ public class GeradoresBO {
         return geradoresDAO.delete(id);
     }
 
-    public GeradoresTO update(GeradoresTO gerador) {
+    public GeradoresTO update(GeradoresTO gerador) throws Exception{
+        ArrayList<String> ifPortatil = new ArrayList<String>();
+        ifPortatil.add("Sim");
+        ifPortatil.add("Nao");
+        if (!ifPortatil.contains(gerador.getPortatil())){
+            throw new Exception("informação portatil inválido. Permitidos: " + ifPortatil);
+        }
         return geradoresDAO.update(gerador);
     }
 }

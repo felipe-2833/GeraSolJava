@@ -17,7 +17,7 @@ public class GeradoresTO {
     @NotNull @PositiveOrZero private Double precoVenda;
     @NotNull @PositiveOrZero private Double precoAluguelDiario;
     @NotBlank private String durabilidade;
-    @NotBlank private String portatil;
+    @NotBlank(message = "Portatil é obrigatório e deve ser 'Sim' ou 'Nao'") private String portatil;
 
     public GeradoresTO() {
     }
