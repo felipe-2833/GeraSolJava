@@ -9,7 +9,7 @@ public class TransacoesAluguelTO {
     private Long idPedido;
     private Long idUsuario;
     private Long idGerador;
-    @PastOrPresent private LocalDate dataInicio;
+    @Future private LocalDate dataInicio;
     @FutureOrPresent private LocalDate dataFim;
     @NotNull @PositiveOrZero private int diasAluguel;
     @NotNull @PositiveOrZero private Double valorDiario;
